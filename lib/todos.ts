@@ -60,9 +60,16 @@ export async function toggleTodo(
 
 export async function deleteTodo(id: string): Promise<void> {
   const supabase = createClient();
-  const { error } = await supabase.from("todos").delete().eq("id", id);
+  const { data, error } = await supabase
+    .from("todos")
+    .delete()
+    .eq("id", id)
+    .select("id");
 
   if (error) {
     throw new Error(error.message);
+  }
+  if (!data?.length) {
+    throw new Error("指定されたTODOが見つかりません");
   }
 }
