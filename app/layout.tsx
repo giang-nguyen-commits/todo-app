@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,24 +12,36 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const notoSansJp = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "TODO App",
-  description: "シンプルな TODO アプリ",
+  title: "HadaMichi | Mỹ phẩm Nhật Bản",
+  description:
+    "Tuyển chọn mỹ phẩm Nhật Bản giúp chăm sóc làn da của bạn. HadaMichi",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="ja"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="vi"
+      className={`${geistSans.variable} ${geistMono.variable} ${notoSansJp.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-slate-50 font-sans text-slate-900">
-        <header className="border-b border-slate-200 bg-white">
+      <body className="min-h-full bg-[#faf6f1] font-sans text-stone-800">
+        <header className="border-b border-stone-200 bg-white/90 backdrop-blur-sm">
           <h1 className="py-3 text-center text-lg font-semibold tracking-tight md:py-4 md:text-xl">
-            TODO App
+            <span className="text-stone-800">HadaMichi</span>
+            <span className="ml-2 text-sm font-normal tracking-wide text-stone-400">
+              Mỹ phẩm Nhật
+            </span>
           </h1>
         </header>
-        <main className="mx-auto w-full max-w-[640px] px-3 py-4 md:px-4 md:py-8">{children}</main>
+        <main className="mx-auto w-full max-w-5xl px-3 py-4 md:px-4 md:py-8">
+          {children}
+        </main>
       </body>
     </html>
   );
